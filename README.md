@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Workshop Management System
 
 A comprehensive Flask-based web application for managing automotive workshop operations including customers, cars, and services.
@@ -185,3 +186,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For support and questions, please open an issue in the repository. 
+=======
+# car-workshop-sys
+>>>>>>> 6ea824dcdf92325c77199df3fe72e1636bf4bd68
