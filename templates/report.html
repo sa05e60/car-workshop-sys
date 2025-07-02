@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Services Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('/static/report-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 450px;
+      color: #fff;
+    }
+
+    .glass-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 1100px;
+      width: 95%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .table {
+      border-radius: 12px;
+      overflow: hidden;
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .table thead th {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.15));
+      color: #ffffff;
+      text-transform: capitalize;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .table thead th i.bi-tools { color: orange; }
+    .table thead th i.bi-currency-dollar { color: #00ff66; }
+    .table thead th i.bi-check-circle { color: #66ccff; }
+    .table thead th i.bi-calendar3 { color: #ffcc00; }
+    .table thead th i.bi-car-front-fill { color: #ff6666; }
+
+    .table tbody td {
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 10px;
+      color: #e8f4fd;
+      font-weight: 500;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .table tr:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.01);
+      transition: all 0.2s ease;
+    }
+
+    /* Color-coded table cells */
+    .table tbody td:nth-child(1) {
+      color: #ffd700;
+      font-weight: 600;
+    }
+
+    .table tbody td:nth-child(2) {
+      color: #00ff88;
+      font-weight: 600;
+    }
+
+    .table tbody td:nth-child(3) {
+      color: #87ceeb;
+      font-weight: 500;
+    }
+
+    .table tbody td:nth-child(4) {
+      color: #dda0dd;
+      font-weight: 500;
+    }
+
+    .table tbody td:nth-child(5) {
+      color: #ffb6c1;
+      font-weight: 500;
+    }
+
+    tfoot tr th {
+      background-color: transparent !important;
+      font-weight: bold;
+      padding: 12px;
+    }
+
+    tfoot tr .total-cost {
+      color: #00ff66 !important;
+    }
+
+    .btn-secondary {
+      border-radius: 10px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #6c757d, #545b62);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(45deg, #545b62, #3d4449);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+    }
+
+    /* Smooth transitions for all interactive elements */
+    * {
+      transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-container">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th><i class="bi bi-tools"></i> Service Type</th>
+        <th><i class="bi bi-currency-dollar"></i> Cost</th>
+        <th><i class="bi bi-check-circle"></i> Status</th>
+        <th><i class="bi bi-calendar3"></i> Date Created</th>
+        <th><i class="bi bi-car-front-fill"></i> Car</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in report %}
+      <tr>
+        <td>{{ row['type'] if row is mapping else row[0] }}</td>
+        <td>{{ row['cost'] if row is mapping else row[1] }}$</td>
+        <td>{{ row['status'] if row is mapping else row[2] }}</td>
+        <td>{{ row['created_at'] if row is mapping else row[5] }}</td>
+        <td>{{ row['car_name'] if row is mapping else row[7] }} {{ row['car_model'] if row is mapping else row[8] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th class="text-end">Total Cost:</th>
+        <th class="total-cost" colspan="4">{{ report | sum(attribute=1) }}$</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary px-4">Return to Main Menu</a>
+  </div>
+</div>
+
+</body>
+</html>

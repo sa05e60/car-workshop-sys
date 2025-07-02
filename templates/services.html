@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url("/static/service-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      padding-top: 400px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 1100px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+      margin-bottom: 200px; 
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .form-control, .form-select {
+      border-radius: 20px;
+      background-color: rgba(255,255,255,0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding-left: 40px;
+      font-weight: 500;
+    }
+
+    .form-control::placeholder {
+      color: #b0b0b0;
+      font-style: italic;
+    }
+
+    .form-control:focus, .form-select:focus {
+      background-color: rgba(255,255,255,0.15);
+      color: #ffffff;
+      border-color: #00d4ff;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    }
+
+    .form-select option {
+      background-color: #2c3e50;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .form-select option:hover {
+      background-color: #3498db;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group i {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #ccc;
+      font-size: 20px;
+      transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+      pointer-events: none;
+    }
+
+    .form-group:has(input:focus) i,
+    .form-group:has(select:focus) i,
+    .form-group:hover i {
+      transform: scale(1.3);
+      color: #ffc107;
+      text-shadow: 0 0 10px #ffc107;
+    }
+
+    .btn-success {
+      background: linear-gradient(45deg, #28a745, #20c997);
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(45deg, #218838, #1ea085);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #007bff, #0056b3);
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #0056b3, #004085);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(45deg, #6c757d, #545b62);
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(45deg, #545b62, #3d4449);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+    }
+
+    .btn-info {
+      background: linear-gradient(45deg, #17a2b8, #138496);
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-info:hover {
+      background: linear-gradient(45deg, #138496, #0f6674);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+    }
+
+    .btn-danger {
+      background: linear-gradient(45deg, #dc3545, #c82333);
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+      background: linear-gradient(45deg, #c82333, #a71e2a);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    }
+
+    .table {
+      margin-top: 20px;
+      border-radius: 18px;
+      overflow: hidden;
+      color: white;
+    }
+
+    .table thead th {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-weight: bold;
+    }
+
+    .table thead th i.bi-wrench { color: orange; }
+    .table thead th i.bi-currency-dollar { color: #00ff66; }
+    .table thead th i.bi-list-task { color: #66ccff; }
+    .table thead th i.bi-calendar-event { color: #ffcc00; }
+    .table thead th i.bi-gear-wide-connected { color: #ff6666; }
+
+    .table thead th i {
+      transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .table thead th i:hover {
+      transform: scale(1.3);
+      color: #ffc107;
+      text-shadow: 0 0 10px #ffc107;
+      cursor: pointer;
+    }
+
+    .table tbody td {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #e8f4fd;
+      font-weight: 500;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .table tr:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.01);
+      transition: all 0.2s ease;
+    }
+
+    .table tbody td:nth-child(1) {
+      color: #ffd700;
+      font-weight: 600;
+    }
+
+    .table tbody td:nth-child(2) {
+      color: #00ff88;
+      font-weight: 600;
+    }
+
+    .table tbody td:nth-child(4) {
+      color: #87ceeb;
+      font-weight: 500;
+    }
+
+    .table tbody td:nth-child(5) {
+      color: #ffb6c1;
+      font-weight: 500;
+    }
+
+    .table tbody td:nth-child(6) {
+      color: #dda0dd;
+      font-weight: 500;
+    }
+
+    .badge {
+      font-size: 0.8em;
+      padding: 0.4em 0.6em;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .badge.bg-warning {
+      background-color: #ffc107 !important;
+      color: #000 !important;
+    }
+
+    .badge.bg-info {
+      background-color: #17a2b8 !important;
+      color: #fff !important;
+    }
+
+    .badge.bg-success {
+      background-color: #28a745 !important;
+      color: #fff !important;
+    }
+
+    .badge.bg-danger {
+      background-color: #dc3545 !important;
+      color: #fff !important;
+    }
+
+    .text-muted {
+      color: #b8c5d1 !important;
+      font-style: italic;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .table td {
+      vertical-align: middle;
+    }
+
+    .table td small {
+      font-size: 0.85em;
+      opacity: 0.8;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .card.bg-dark {
+      background: linear-gradient(135deg, #2c3e50, #34495e) !important;
+    }
+
+    .alert {
+      border-radius: 15px;
+      border: none;
+      font-weight: 500;
+    }
+
+    .alert-warning {
+      background: linear-gradient(45deg, #ffc107, #ffb300);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    }
+
+    /* Enhanced table header */
+    .table thead th {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+      color: #ffffff;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Smooth transitions for all interactive elements */
+    * {
+      transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Service Management</h2>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-warning">{{ messages[0] }}</div>
+  {% endif %}
+  {% endwith %}
+
+  <!-- Search/Filter Section -->
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <div class="card bg-dark text-white">
+        <div class="card-body">
+          <h6 class="card-title"><i class="bi bi-search"></i> Search & Filter Services</h6>
+          <form method="GET" class="row g-2">
+            <div class="col-md-3">
+              <input type="text" name="search" class="form-control" placeholder="Search by service type or description" value="{{ request.args.get('search', '') }}">
+            </div>
+            <div class="col-md-2">
+              <select name="status_filter" class="form-select">
+                <option value="">All Status</option>
+                <option value="Pending" {{ 'selected' if request.args.get('status_filter') == 'Pending' }}>Pending</option>
+                <option value="In Progress" {{ 'selected' if request.args.get('status_filter') == 'In Progress' }}>In Progress</option>
+                <option value="Completed" {{ 'selected' if request.args.get('status_filter') == 'Completed' }}>Completed</option>
+                <option value="Cancelled" {{ 'selected' if request.args.get('status_filter') == 'Cancelled' }}>Cancelled</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select name="customer_filter" class="form-select">
+                <option value="">All Customers</option>
+                {% for car in cars %}
+                <option value="{{ car['customer_name'] if car is mapping else car[4] }}" {{ 'selected' if request.args.get('customer_filter') == (car['customer_name'] if car is mapping else car[4]) }}>
+                  {{ car['customer_name'] if car is mapping else car[4] }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-search"></i> Search
+              </button>
+            </div>
+            <div class="col-md-2">
+              <a href="{{ url_for('manage_services') }}" class="btn btn-secondary w-100">
+                <i class="bi bi-arrow-clockwise"></i> Clear
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form method="POST" class="mb-4 row g-2">
+    <div class="col-md-2 form-group">
+      <i class="bi bi-tools"></i>
+      <input name="type" class="form-control" placeholder="Service Type" required>
+    </div>
+    <div class="col-md-2 form-group">
+      <i class="bi bi-currency-dollar"></i>
+      <input name="cost" class="form-control" placeholder="Cost" required>
+    </div>
+    <div class="col-md-2 form-group">
+      <i class="bi bi-list-check"></i>
+      <select name="status" class="form-select" required>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+    </div>
+    <div class="col-md-3 form-group">
+      <i class="bi bi-car-front"></i>
+      <select name="car_id" class="form-select" required>
+        <option disabled selected>Choose the car</option>
+        {% for car in cars %}
+        <option value="{{ car['id'] if car is mapping else car[0] }}">
+          {{ car['customer_name'] if car is mapping else car[4] }} - {{ car['name'] if car is mapping else car[1] }} {{ car['model'] if car is mapping else car[2] }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2 form-group">
+      <i class="bi bi-text-paragraph"></i>
+      <input name="description" class="form-control" placeholder="Description (optional)">
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-success w-100">Add</button>
+    </div>
+  </form>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th><i class="bi bi-wrench"></i> Service Type</th>
+        <th><i class="bi bi-currency-dollar"></i> Cost</th>
+        <th><i class="bi bi-list-task"></i> Status</th>
+        <th><i class="bi bi-car-front"></i> Car</th>
+        <th><i class="bi bi-person"></i> Customer</th>
+        <th><i class="bi bi-calendar-event"></i> Date Created</th>
+        <th><i class="bi bi-gear-wide-connected"></i> Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in services %}
+      <tr>
+        <td>
+          {{ s['type'] if s is mapping else s[1] }}
+          {% set description = s['description'] if s is mapping else s[4] %}
+          {% if description %}
+            <br><small class="text-muted">{{ description }}</small>
+          {% endif %}
+        </td>
+        <td>${{ s['cost'] if s is mapping else s[2] }}</td>
+        <td>
+          {% set status = s['status'] if s is mapping else s[3] %}
+          {% if status == 'Pending' %}
+            <span class="badge bg-warning text-dark">{{ status }}</span>
+          {% elif status == 'In Progress' %}
+            <span class="badge bg-info">{{ status }}</span>
+          {% elif status == 'Completed' %}
+            <span class="badge bg-success">{{ status }}</span>
+          {% elif status == 'Cancelled' %}
+            <span class="badge bg-danger">{{ status }}</span>
+          {% else %}
+            <span class="badge bg-secondary">{{ status }}</span>
+          {% endif %}
+        </td>
+        <td>{{ s['car_name'] if s is mapping else s[9] }} {{ s['car_model'] if s is mapping else s[10] }}</td>
+        <td>{{ s['customer_name'] if s is mapping else s[11] }}</td>
+        <td>{{ s['created_at'] if s is mapping else s[7] }}</td>
+        <td>
+          {% set status = s['status'] if s is mapping else s[3] %}
+          {% if status == 'Pending' %}
+            <form method="POST" action="{{ url_for('start_service', service_id=s['id'] if s is mapping else s[0]) }}" style="display:inline-block;">
+              <button type="submit" class="btn btn-sm btn-info" title="Start service">
+                <i class="bi bi-play-circle"></i> Start
+              </button>
+            </form>
+          {% elif status == 'In Progress' %}
+            <form method="POST" action="{{ url_for('end_service', service_id=s['id'] if s is mapping else s[0]) }}" style="display:inline-block;">
+              <button type="submit" class="btn btn-sm btn-success" title="Mark as completed">
+                <i class="bi bi-check-circle"></i> Complete
+              </button>
+            </form>
+          {% elif status == 'Completed' %}
+            <span class="text-success"><i class="bi bi-check-circle-fill"></i> Completed</span>
+          {% elif status == 'Cancelled' %}
+            <span class="text-danger"><i class="bi bi-x-circle-fill"></i> Cancelled</span>
+          {% endif %}
+          
+          {% if role == 'admin' %}
+            <form method="POST" action="{{ url_for('delete_service', service_id=s['id'] if s is mapping else s[0]) }}" style="display:inline-block; margin-left: 5px;">
+              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?');" title="Delete service">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

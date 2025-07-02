@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url("/static/garage.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 500px; 
+    }
+
+    .welcome-banner {
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .menu-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+    }
+
+    .menu-box {
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
+      padding: 15px 25px;
+      width: 220px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .menu-box:hover {
+      transform: scale(1.03);
+      cursor: pointer;
+    }
+
+    .menu-box a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .menu-box a:hover {
+      text-decoration: underline;
+    }
+
+    .menu-box.logout a {
+      color: red;
+    }
+
+    .menu-box.logout i {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('unauthorized') === '1') {
+      alert("access denied... this page only for the admin");
+    }
+  </script>
+
+  <div class="welcome-banner">
+    welcome, {{ username }} ({{ role }})
+  </div>
+
+  <div class="menu-wrapper">
+    <div class="menu-box">
+      <i class="bi bi-people-fill text-primary"></i>
+      <a href="{{ url_for('manage_customers') }}">Customers Management</a>
+    </div>
+    <div class="menu-box">
+      <i class="bi bi-car-front-fill text-success"></i>
+      <a href="{{ url_for('manage_cars') }}">Cars Management</a>
+    </div>
+    <div class="menu-box">
+      <i class="bi bi-tools text-warning"></i>
+      <a href="{{ url_for('manage_services') }}">Adding Services</a>
+    </div>
+    <div class="menu-box">
+      <i class="bi bi-currency-dollar text-info"></i>
+      <a href="{{ url_for('report') }}">Services and Cost</a>
+    </div>
+    <div class="menu-box logout">
+      <i class="bi bi-box-arrow-right"></i>
+      <a href="{{ url_for('logout') }}">Log Out</a>
+    </div>
+      </div>
+  </div>
+
+</body>
+</html>

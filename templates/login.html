@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-image: url("/static/login-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .glass-box {
+      background: rgba(255, 255, 255, 0.000);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 25px;
+      width: 100%;
+      max-width: 380px; 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      margin-top: 220px;
+      transform: translateX(0);
+    }
+
+    .glass-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .form-control {
+      background-color: transparent !important;
+      color: white !important;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 14px;
+      padding-left: 40px;
+    }
+
+    .form-control::placeholder {
+      color: #ccc;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group i {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #ffc107;
+      font-size: 20px;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+      pointer-events: none;
+    }
+
+    .form-group:has(input:focus) i,
+    .form-group:hover i {
+      transform: scale(1.3);
+      text-shadow: 0 0 10px #ffc107;
+    }
+
+    .form-check-label, .forgot-link {
+      color: #eee;
+      font-size: 14px;
+    }
+
+
+
+    .btn-login {
+      border-radius: 20px;
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      transition: 0.3s ease;
+      padding: 10px 25px;
+      position: relative;
+    }
+
+
+
+    .alert {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .btn-wrapper {
+      position: relative;
+      height: 50px;
+      margin-top: 10px;
+    }
+
+    .btn-wrapper-inner {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: left 0.3s ease;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      font-weight: 500;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      padding: 10px 20px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .footer a {
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px #ffc107;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glass-box">
+    <h2>Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-danger">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" oninput="checkFields()">
+      <div class="form-group mb-3">
+        <i class="bi bi-person-fill"></i>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+      </div>
+      <div class="form-group mb-3">
+        <i class="bi bi-lock-fill"></i>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+      </div>
+
+      <div class="d-flex justify-content-start align-items-center mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rememberMe">
+          <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+      </div>
+
+      <div class="btn-wrapper">
+        <div class="btn-wrapper-inner" id="btnContainer">
+          <button type="submit" class="btn btn-login" id="loginBtn">Login</button>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+
+  <script>
+    const btn = document.getElementById('loginBtn');
+    const btnContainer = document.getElementById('btnContainer');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+
+    function checkFields() {
+      const filled = username.value.trim() !== "" && password.value.trim() !== "";
+      if (filled) {
+        btnContainer.style.left = "50%";
+      }
+    }
+
+    btn.addEventListener('mouseenter', () => {
+      const filled = username.value.trim() !== "" && password.value.trim() !== "";
+      if (!filled) {
+        const current = btnContainer.style.left;
+        btnContainer.style.left = current === "30%" ? "70%" : "30%";
+      }
+    });
+  </script>
+
+  <!-- Footer -->
+  <div class="footer">
+    Created by <a href="#" title="Saif Fadhil">Saif Fadhil</a> - All rights reserved © 2025
+  </div>
+
+</body>
+</html>
