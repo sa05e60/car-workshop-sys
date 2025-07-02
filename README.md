@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Workshop Management System
 
 A comprehensive Flask-based web application for managing automotive workshop operations including customers, cars, and services.
@@ -35,7 +34,7 @@ This project demonstrates modern web development practices, security implementat
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/sa05e60/car-workshop-sys.git
    cd workshop-management-system
    ```
 
@@ -181,11 +180,9 @@ Logs are written to the console and can be configured through environment variab
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
+NONE
 ## Support
 
 For support and questions, please open an issue in the repository. 
 =======
 # car-workshop-sys
->>>>>>> 6ea824dcdf92325c77199df3fe72e1636bf4bd68
